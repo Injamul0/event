@@ -13,18 +13,11 @@ import { Label } from "@/components/ui/label";
 export default function Home() {
   return (
     <>
-      <section className="relative h-[60vh] min-h-[400px] flex items-center justify-center text-center text-white overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="https://picsum.photos/1920/1080"
-            alt="Hero background"
-            fill
-            style={{ objectFit: 'cover' }}
-            className="brightness-50"
-            data-ai-hint="community event"
-          />
-          <div className="absolute inset-0 bg-black/30" />
-        </div>
+      <section 
+        className="relative h-[60vh] min-h-[400px] flex items-center justify-center text-center text-white overflow-hidden bg-cover bg-center bg-no-repeat bg-fixed"
+        style={{ backgroundImage: "url('https://picsum.photos/1920/1080')" }}
+      >
+        <div className="absolute inset-0 bg-black/40" />
         <div className="relative z-10 p-4">
           <h1 className="text-4xl md:text-6xl font-headline font-bold tracking-tight mb-4">
             Welcome to ClubHub
