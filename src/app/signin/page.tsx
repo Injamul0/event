@@ -41,9 +41,9 @@ export default function SignInPage() {
       // Simulate a successful login for any other user
       toast({
         title: 'Login Successful',
-        description: "Welcome back!",
+        description: "Welcome back! Redirecting you to the homepage.",
       });
-      // You could redirect to a user dashboard here, e.g., router.push('/dashboard')
+      router.push('/');
     } else {
       toast({
         title: 'Login Failed',
