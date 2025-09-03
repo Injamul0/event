@@ -2,8 +2,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Sprout } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import Logo from './Logo';
 
 export default function SplashScreen() {
   const [isVisible, setIsVisible] = useState(true);
@@ -40,7 +40,7 @@ export default function SplashScreen() {
     >
       <div className="relative animate-logo-entrance">
         <div className="flex items-center space-x-4">
-          <Sprout className="h-16 w-16 text-primary" />
+          <Logo className="h-16 w-16" />
           <span className="text-5xl font-bold font-headline text-primary-foreground">Campus-Vibe</span>
         </div>
       </div>

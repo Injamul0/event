@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Sprout, Bell, Calendar, PartyPopper, CheckCircle2 } from 'lucide-react';
+import { Menu, Bell, Calendar, PartyPopper, CheckCircle2 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import {
@@ -19,6 +19,7 @@ import {
   DropdownMenuFooter,
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import Logo from './Logo';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -78,7 +79,7 @@ export default function Header() {
       <div className="container flex h-14 items-center">
         <div className="mr-4 hidden md:flex">
           <Link href="/" className="flex items-center space-x-2">
-            <Sprout className="h-6 w-6 text-primary" />
+            <Logo className="h-6 w-6" />
             <span className="hidden font-bold sm:inline-block font-headline">Campus-Vibe</span>
           </Link>
         </div>
@@ -123,7 +124,7 @@ export default function Header() {
               <SheetContent side="left">
                 <div className="flex flex-col gap-6 p-6">
                   <Link href="/" className="flex items-center space-x-2">
-                     <Sprout className="h-6 w-6 text-primary" />
+                     <Logo className="h-6 w-6" />
                     <span className="font-bold font-headline">Campus-Vibe</span>
                   </Link>
                   {navLinks.map((link) => {

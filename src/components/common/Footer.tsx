@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { Sprout, Twitter, Github, Facebook, Linkedin } from 'lucide-react';
+import { Twitter, Github, Facebook, Linkedin } from 'lucide-react';
+import Logo from './Logo';
 
 export default function Footer() {
   return (
@@ -8,7 +9,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-6 md:mb-0">
             <Link href="/" className="flex items-center space-x-2">
-              <Sprout className="h-8 w-8 text-primary" />
+              <Logo className="h-8 w-8" />
               <span className="text-2xl font-bold font-headline">Campus-Vibe</span>
             </Link>
             <p className="mt-2 text-sm text-muted-foreground">Your community event hub.</p>
