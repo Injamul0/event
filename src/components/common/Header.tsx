@@ -21,8 +21,6 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 const navLinks = [
   { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' },
   { href: '/admin', label: 'Admin' },
 ];
 
