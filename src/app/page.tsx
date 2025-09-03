@@ -12,7 +12,7 @@ import { Label } from "@/components/ui/label";
 
 export default function Home() {
   return (
-    <div className="snap-y snap-mandatory h-[calc(100vh-56px)] w-full overflow-y-auto overflow-x-hidden">
+    <div className="snap-y snap-mandatory h-[calc(100vh-56px)] overflow-y-scroll">
       <section 
         className="relative h-full w-full flex items-center justify-center text-center text-white overflow-hidden bg-cover bg-center bg-no-repeat bg-fixed snap-start"
         style={{ backgroundImage: "url('https://picsum.photos/1920/1080')" }}
@@ -37,7 +37,7 @@ export default function Home() {
         <EventList events={events} />
       </section>
 
-      <section id="about" className="h-full w-full flex items-center snap-start bg-secondary text-secondary-foreground py-16">
+      <section id="about" className="h-full w-full flex items-center snap-start bg-secondary text-secondary-foreground">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -63,7 +63,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="contact" className="h-full w-full flex items-center snap-start py-16">
+      <section id="contact" className="h-full w-full flex items-center snap-start">
         <div className="container mx-auto px-4">
            <div className="max-w-2xl mx-auto">
             <Card>
