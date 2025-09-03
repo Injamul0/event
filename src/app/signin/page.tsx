@@ -181,9 +181,6 @@ export default function SignInPage() {
               Sign up
             </Link>
           </div>
-           <p className="mt-4 text-center text-xs text-muted-foreground">
-              Admin: <strong>admin@example.com</strong> / <strong>password</strong>
-            </p>
         </CardContent>
       </Card>
     </div>
