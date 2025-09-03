@@ -52,7 +52,7 @@ export default function SummarizeReviews({ eventName, reviews }: SummarizeReview
       </Button>
       
       {summary && (
-        <Card className="mt-4 bg-secondary border-primary/50">
+        <Card className="mt-4 bg-secondary border-primary/20">
           <CardContent className="p-6">
             <h3 className="font-headline text-lg font-semibold mb-2 flex items-center gap-2">
               <Sparkles className="h-5 w-5 text-primary" />

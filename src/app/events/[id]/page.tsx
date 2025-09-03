@@ -40,11 +40,12 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
                 style={{ objectFit: 'cover' }}
                  data-ai-hint={`${event.category.toLowerCase()} event`}
               />
+               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             </div>
             <Badge variant="secondary" className="mt-4">{event.category}</Badge>
             <h1 className="text-4xl md:text-5xl font-headline font-bold mt-2">{event.name}</h1>
           </div>
-          <div className="prose prose-lg max-w-none text-foreground/90">
+          <div className="prose prose-lg max-w-none text-foreground/80">
             <p>{event.longDescription}</p>
           </div>
         </div>
@@ -72,7 +73,7 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
               </div>
             </CardContent>
           </Card>
-          <Button size="lg" className="w-full bg-accent text-accent-foreground hover:bg-accent/90 text-lg">RSVP Now</Button>
+          <Button size="lg" className="w-full text-lg">RSVP Now</Button>
         </div>
       </div>
 
@@ -92,7 +93,7 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
                     <p className="font-semibold">{review.author}</p>
                     <div className="flex items-center">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className={`h-4 w-4 ${i < review.rating ? 'text-yellow-400 fill-yellow-400' : 'text-muted-foreground'}`} />
+                        <Star key={i} className={`h-4 w-4 ${i < review.rating ? 'text-primary fill-primary' : 'text-muted-foreground'}`} />
                       ))}
                     </div>
                   </div>

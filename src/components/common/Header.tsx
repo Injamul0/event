@@ -23,7 +23,6 @@ const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/#about', label: 'About' },
   { href: '/#contact', label: 'Contact' },
-  { href: '/admin', label: 'Admin' },
 ];
 
 type User = {
@@ -85,7 +84,6 @@ export default function Header() {
         
         <nav className="hidden md:flex items-center gap-6 text-sm">
           {navLinks.map((link) => {
-            if (link.href === '/admin' && !isAdmin) return null;
             return (
               <Link
                 key={link.href}
@@ -99,6 +97,17 @@ export default function Header() {
               </Link>
             );
           })}
+           {isAdmin && (
+             <Link
+                href='/admin'
+                className={cn(
+                  'transition-colors hover:text-foreground/80',
+                  (pathname === '/admin') ? 'text-foreground' : 'text-foreground/60'
+                )}
+              >
+                Admin
+              </Link>
+           )}
         </nav>
 
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
@@ -117,13 +126,17 @@ export default function Header() {
                     <span className="font-bold font-headline">ClubHub</span>
                   </Link>
                   {navLinks.map((link) => {
-                     if (link.href === '/admin' && !isAdmin) return null;
                     return(
                       <Link key={link.href} href={link.href} className="text-lg">
                         {link.label}
                       </Link>
                     )
                   })}
+                  {isAdmin && (
+                    <Link href='/admin' className="text-lg">
+                      Admin
+                    </Link>
+                  )}
                 </div>
               </SheetContent>
             </Sheet>
@@ -162,7 +175,7 @@ export default function Header() {
                 <Button variant="ghost" asChild>
                   <Link href="/signin">Sign In</Link>
                 </Button>
-                <Button className="bg-primary text-primary-foreground hover:bg-primary/90" asChild>
+                <Button asChild>
                   <Link href="/signup">Sign Up</Link>
                 </Button>
               </>
