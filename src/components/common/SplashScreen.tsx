@@ -8,7 +8,6 @@ import { cn } from '@/lib/utils';
 export default function SplashScreen() {
   const [isVisible, setIsVisible] = useState(true);
   const [isFading, setIsFading] = useState(false);
-  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const fadeTimer = setTimeout(() => {
@@ -19,20 +18,9 @@ export default function SplashScreen() {
       setIsVisible(false);
     }, 1700);
 
-    const progressInterval = setInterval(() => {
-      setProgress(prev => {
-        if (prev >= 100) {
-          clearInterval(progressInterval);
-          return 100;
-        }
-        return prev + 1;
-      });
-    }, 12); // 12ms * 100 = 1200ms = 1.2s
-
     return () => {
       clearTimeout(fadeTimer);
       clearTimeout(visibilityTimer);
-      clearInterval(progressInterval);
     };
   }, []);
 
@@ -55,12 +43,6 @@ export default function SplashScreen() {
           <Sprout className="h-16 w-16 text-primary" />
           <span className="text-5xl font-bold font-headline text-white">ClubHub</span>
         </div>
-      </div>
-      <div className="absolute bottom-16 w-1/4 max-w-xs h-1 bg-white/20 rounded-full overflow-hidden">
-        <div 
-          className="h-full bg-primary transition-all duration-100 ease-linear"
-          style={{ width: `${progress}%` }}
-        />
       </div>
     </div>
   );
