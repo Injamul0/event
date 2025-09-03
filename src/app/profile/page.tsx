@@ -18,7 +18,7 @@ const defaultUser = {
   name: "Alex Doe",
   email: "alex.doe@example.com",
   initials: "AD",
-  avatarUrl: "https://i.pravatar.cc/150?img=12",
+  avatarUrl: "",
   joined: "December 2023",
   bio: "Passionate about technology, community building, and attending local tech meetups. Always looking to learn something new.",
   notifications: {
@@ -106,7 +106,7 @@ export default function ProfilePage() {
             <CardHeader className="text-center p-6">
               <div className="relative w-24 h-24 mx-auto group">
                 <Avatar className="w-24 h-24 border-4 border-primary">
-                  <AvatarImage src={user.avatarUrl} alt={user.name} />
+                  {user.avatarUrl && <AvatarImage src={user.avatarUrl} alt={user.name} />}
                   <AvatarFallback className="text-3xl">{user.initials}</AvatarFallback>
                 </Avatar>
                 <Button 

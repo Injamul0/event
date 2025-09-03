@@ -68,7 +68,7 @@ export default function SignInPage() {
           name: "Admin User",
           email: adminEmail,
           initials: "AU",
-          avatarUrl: "https://i.pravatar.cc/150?img=10",
+          avatarUrl: "",
         };
         sessionStorage.setItem('user', JSON.stringify(adminUser));
         router.push('/admin');
@@ -78,7 +78,7 @@ export default function SignInPage() {
           name: "Alex Doe",
           email: email,
           initials: "AD",
-          avatarUrl: "https://i.pravatar.cc/150?img=12",
+          avatarUrl: "",
         };
         sessionStorage.setItem('user', JSON.stringify(defaultUser));
         toast({
