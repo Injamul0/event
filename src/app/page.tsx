@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { events } from '@/lib/mock-data';
 import EventList from '@/components/events/EventList';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Search } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -33,9 +33,20 @@ export default function Home() {
           <p className="text-lg md:text-xl max-w-2xl mx-auto mb-8 text-white/90 text-shadow">
             Your central place for discovering, joining, and managing club events.
           </p>
-          <Button asChild size="lg">
+           <div className="flex max-w-xl mx-auto mb-8">
+            <div className="relative flex-grow">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+              <Input
+                type="search"
+                placeholder="Find your next event..."
+                className="w-full pl-12 h-12 text-base bg-white/90 text-foreground"
+              />
+            </div>
+            <Button size="lg" className="h-12 rounded-l-none">Search</Button>
+          </div>
+          <Button asChild size="lg" variant="outline" className="bg-transparent hover:bg-white/10 border-white/80">
             <Link href="#events">
-              Explore Events <ArrowRight className="ml-2 h-5 w-5" />
+              Or Explore Events <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>
         </div>
