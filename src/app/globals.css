@@ -7,7 +7,7 @@ html {
 }
 
 body {
-  font-family: 'PT Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 @layer base {
@@ -70,14 +70,23 @@ body {
   to { opacity: 0; }
 }
 
-@keyframes pulse-logo {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 1;
+@keyframes logo-entrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
   }
-  50% {
-    transform: scale(1.1);
-    opacity: 0.8;
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes glimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
   }
 }
 
@@ -85,6 +94,17 @@ body {
   animation: fade-out 0.5s ease-out forwards;
 }
 
-.animate-pulse-logo {
-  animation: pulse-logo 2s ease-in-out infinite;
+.animate-logo-entrance {
+  animation: logo-entrance 1s ease-out forwards;
+}
+
+.animate-glimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: glimmer 2s ease-in-out 1s infinite;
 }
