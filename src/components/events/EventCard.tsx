@@ -23,8 +23,8 @@ export function EventCard({ event }: EventCardProps) {
   });
 
   return (
-    <Link href={`/events/${event.id}`} className="block group perspective">
-      <Card className="overflow-hidden h-full flex flex-col transition-all duration-500 ease-in-out group-hover:shadow-2xl group-hover:-translate-y-2 preserve-3d group-hover:rotate-x-15 group-hover:rotate-y-15">
+    <Link href={`/events/${event.id}`} className="block group">
+      <Card className="overflow-hidden h-full flex flex-col transition-all duration-300 ease-in-out group-hover:shadow-2xl group-hover:-translate-y-2">
         <CardHeader className="p-0 relative">
            <div className="overflow-hidden">
             <Image

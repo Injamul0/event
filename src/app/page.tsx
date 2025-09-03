@@ -57,7 +57,7 @@ export default function Home() {
                 Whether you're looking for a tech conference, a music festival, or a community gathering, ClubHub makes it easy to find events that match your interests. We believe in the power of community and the magic that happens when people come together.
               </p>
             </div>
-             <div className="relative w-full h-auto aspect-[4/3] rounded-xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-300 group perspective">
+             <div className="relative w-full h-auto aspect-[4/3] rounded-xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-300">
               <Image
                 src="https://picsum.photos/800/600"
                 alt="Community gathering"
@@ -65,7 +65,6 @@ export default function Home() {
                 height={600}
                 style={{ objectFit: 'cover' }}
                 data-ai-hint="community gathering"
-                className="transition-transform duration-500 ease-in-out group-hover:rotate-x-15 group-hover:rotate-y-15"
               />
             </div>
           </div>
@@ -74,8 +73,8 @@ export default function Home() {
 
       <section id="contact" className="py-24">
         <div className="container mx-auto px-4">
-           <div className="max-w-2xl mx-auto perspective group">
-            <Card className="shadow-lg transition-transform duration-500 ease-in-out preserve-3d group-hover:rotate-x-15 group-hover:rotate-y-15">
+           <div className="max-w-2xl mx-auto">
+            <Card className="shadow-lg transition-transform duration-300 hover:scale-105">
               <CardHeader>
                 <CardTitle className="text-3xl font-headline text-center">Contact Us</CardTitle>
               </CardHeader>
