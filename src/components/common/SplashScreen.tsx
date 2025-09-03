@@ -31,17 +31,17 @@ export default function SplashScreen() {
   return (
     <div
       className={cn(
-        'fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#1a1a1a] transition-opacity duration-500',
+        'fixed inset-0 z-[100] flex flex-col items-center justify-center transition-opacity duration-500',
         isFading && 'opacity-0'
       )}
       style={{
-        background: 'radial-gradient(circle, rgba(40,40,40,1) 0%, rgba(20,20,20,1) 100%)',
+        background: 'linear-gradient(135deg, hsl(45, 90%, 90%) 0%, hsl(20, 90%, 90%) 100%)',
       }}
     >
       <div className="relative animate-logo-entrance">
-        <div className="flex items-center space-x-4 animate-glimmer">
+        <div className="flex items-center space-x-4">
           <Sprout className="h-16 w-16 text-primary" />
-          <span className="text-5xl font-bold font-headline text-white">ClubHub</span>
+          <span className="text-5xl font-bold font-headline text-primary-foreground">ClubHub</span>
         </div>
       </div>
     </div>
