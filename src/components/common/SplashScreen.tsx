@@ -10,13 +10,17 @@ export default function SplashScreen() {
   const [isFading, setIsFading] = useState(false);
 
   useEffect(() => {
+    // Disable browser's automatic scroll restoration
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    
     const fadeTimer = setTimeout(() => {
       setIsFading(true);
     }, 1200);
 
     const visibilityTimer = setTimeout(() => {
       setIsVisible(false);
-      window.scrollTo(0, 0); // Force scroll to top
     }, 1700);
 
     return () => {
