@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Sprout, Bell } from 'lucide-react';
+import { Menu, Sprout, Bell, Calendar, PartyPopper, CheckCircle2 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import {
@@ -16,6 +16,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
+  DropdownMenuFooter,
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
@@ -153,12 +154,34 @@ export default function Header() {
                       <span className="sr-only">Notifications</span>
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
+                  <DropdownMenuContent align="end" className="w-80">
                     <DropdownMenuLabel>Notifications</DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem>New event: Annual Tech Conference</DropdownMenuItem>
-                    <DropdownMenuItem>Your RSVP for Summer Music Fest is confirmed.</DropdownMenuItem>
-                    <DropdownMenuItem>Community Cleanup Day is this weekend!</DropdownMenuItem>
+                    <DropdownMenuItem>
+                      <Calendar className="mr-2 h-4 w-4 text-primary" />
+                      <div className="flex-grow">
+                        <p className="text-sm font-medium">New event: Annual Tech Conference</p>
+                        <p className="text-xs text-muted-foreground">5m ago</p>
+                      </div>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                      <CheckCircle2 className="mr-2 h-4 w-4 text-green-500" />
+                       <div className="flex-grow">
+                        <p className="text-sm">Your RSVP for Summer Music Fest is confirmed.</p>
+                         <p className="text-xs text-muted-foreground">1h ago</p>
+                      </div>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                      <PartyPopper className="mr-2 h-4 w-4 text-yellow-500" />
+                       <div className="flex-grow">
+                        <p className="text-sm">Community Cleanup Day is this weekend!</p>
+                         <p className="text-xs text-muted-foreground">1d ago</p>
+                      </div>
+                    </DropdownMenuItem>
+                     <DropdownMenuSeparator />
+                     <DropdownMenuItem className="justify-center text-sm text-primary hover:text-primary">
+                        <Link href="#">View all notifications</Link>
+                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
                 <DropdownMenu>
