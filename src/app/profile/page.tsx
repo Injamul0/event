@@ -14,29 +14,40 @@ import { events } from '@/lib/mock-data';
 import Link from 'next/link';
 import { useToast } from '@/hooks/use-toast';
 
+const defaultUser = {
+  name: "Alex Doe",
+  email: "alex.doe@example.com",
+  initials: "AD",
+  avatarUrl: "https://i.pravatar.cc/150?img=12",
+  joined: "December 2023",
+  bio: "Passionate about technology, community building, and attending local tech meetups. Always looking to learn something new.",
+  notifications: {
+    newsletter: true,
+    eventReminders: false,
+  }
+};
+
 export default function ProfilePage() {
   const [isEditing, setIsEditing] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
   
-  const [user, setUser] = useState({
-    name: "Alex Doe",
-    email: "alex.doe@example.com",
-    initials: "AD",
-    avatarUrl: "https://i.pravatar.cc/150?img=12",
-    joined: "December 2023",
-    bio: "Passionate about technology, community building, and attending local tech meetups. Always looking to learn something new.",
-    notifications: {
-      newsletter: true,
-      eventReminders: false,
-    }
-  });
+  const [user, setUser] = useState(defaultUser);
 
   useEffect(() => {
     try {
       const storedUser = sessionStorage.getItem('user');
       if (storedUser) {
-        setUser(JSON.parse(storedUser));
+        const parsedUser = JSON.parse(storedUser);
+        setUser(currentUser => ({
+          ...defaultUser,
+          ...currentUser,
+          ...parsedUser,
+          notifications: {
+            ...defaultUser.notifications,
+            ...(parsedUser.notifications || {}),
+          },
+        }));
       }
     } catch (error) {
       console.error("Could not retrieve user from session storage");
