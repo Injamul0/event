@@ -21,7 +21,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import AnalyticsChart from "@/components/admin/AnalyticsChart"
 import { events, users } from "@/lib/mock-data"
-import { BarChart, Calendar, Users, Activity, Loader2, KeyRound } from "lucide-react"
+import { BarChart, Calendar, Users, Activity, Loader2, KeyRound, Eye, EyeOff } from "lucide-react"
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
@@ -36,6 +36,9 @@ export default function AdminDashboard() {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   useEffect(() => {
     try {
@@ -196,15 +199,30 @@ export default function AdminDashboard() {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="current-password">Current Password</Label>
-                <Input id="current-password" type="password" placeholder="Required to make changes" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} required />
+                <div className="relative">
+                  <Input id="current-password" type={showCurrentPassword ? "text" : "password"} placeholder="Required to make changes" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} required />
+                  <button type="button" onClick={() => setShowCurrentPassword(!showCurrentPassword)} className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
+                    {showCurrentPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  </button>
+                </div>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="new-password">New Password</Label>
-                <Input id="new-password" type="password" placeholder="Leave blank to keep same" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
+                <div className="relative">
+                  <Input id="new-password" type={showNewPassword ? "text" : "password"} placeholder="Leave blank to keep same" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
+                  <button type="button" onClick={() => setShowNewPassword(!showNewPassword)} className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
+                    {showNewPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  </button>
+                </div>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="confirm-password">Confirm New Password</Label>
-                <Input id="confirm-password" type="password" placeholder="Leave blank to keep same" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+                <div className="relative">
+                  <Input id="confirm-password" type={showConfirmPassword ? "text" : "password"} placeholder="Leave blank to keep same" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+                   <button type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
+                    {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  </button>
+                </div>
               </div>
               <Button type="submit" className="w-full">
                 <KeyRound className="mr-2 h-4 w-4" />
