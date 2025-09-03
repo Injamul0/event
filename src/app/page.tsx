@@ -12,9 +12,9 @@ import { Label } from "@/components/ui/label";
 
 export default function Home() {
   return (
-    <>
+    <div className="snap-y snap-mandatory h-[calc(100vh-56px)] w-full overflow-y-auto overflow-x-hidden">
       <section 
-        className="relative h-[60vh] min-h-[400px] flex items-center justify-center text-center text-white overflow-hidden bg-cover bg-center bg-no-repeat bg-fixed"
+        className="relative h-full w-full flex items-center justify-center text-center text-white overflow-hidden bg-cover bg-center bg-no-repeat bg-fixed snap-start"
         style={{ backgroundImage: "url('https://picsum.photos/1920/1080')" }}
       >
         <div className="absolute inset-0 bg-black/40" />
@@ -33,11 +33,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="events" className="container mx-auto px-4 py-16">
+      <section id="events" className="container mx-auto px-4 py-16 h-full w-full flex flex-col justify-center snap-start">
         <EventList events={events} />
       </section>
 
-      <section id="about" className="bg-secondary text-secondary-foreground py-16">
+      <section id="about" className="bg-secondary text-secondary-foreground py-16 h-full w-full flex items-center snap-start">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -63,7 +63,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="contact" className="py-16">
+      <section id="contact" className="py-16 h-full w-full flex items-center snap-start">
         <div className="container mx-auto px-4">
            <div className="max-w-2xl mx-auto">
             <Card>
@@ -91,6 +91,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
