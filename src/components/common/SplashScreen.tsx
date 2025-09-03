@@ -31,17 +31,14 @@ export default function SplashScreen() {
   return (
     <div
       className={cn(
-        'fixed inset-0 z-[100] flex flex-col items-center justify-center transition-opacity duration-500',
+        'fixed inset-0 z-[100] flex flex-col items-center justify-center bg-background transition-opacity duration-500',
         isFading && 'opacity-0'
       )}
-      style={{
-        background: 'linear-gradient(135deg, hsl(45, 90%, 90%) 0%, hsl(20, 90%, 90%) 100%)',
-      }}
     >
       <div className="relative animate-logo-entrance">
         <div className="flex items-center space-x-4">
           <Logo className="h-16 w-16" />
-          <span className="text-5xl font-bold font-headline text-primary-foreground">Campus-Vibe</span>
+          <span className="text-5xl font-bold font-headline text-primary">Campus-Vibe</span>
         </div>
       </div>
     </div>
