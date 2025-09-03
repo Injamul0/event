@@ -145,11 +145,22 @@ export default function Header() {
           <div className="flex items-center gap-2">
             {isLoggedIn && user ? (
                <>
-                <Button variant="ghost" size="icon" className="relative">
-                  <Bell className="h-5 w-5" />
-                   <span className="absolute top-2 right-2.5 block h-2 w-2 rounded-full bg-primary ring-2 ring-background" />
-                  <span className="sr-only">Notifications</span>
-                </Button>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" size="icon" className="relative">
+                      <Bell className="h-5 w-5" />
+                      <span className="absolute top-2 right-2.5 block h-2 w-2 rounded-full bg-primary ring-2 ring-background" />
+                      <span className="sr-only">Notifications</span>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuLabel>Notifications</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem>New event: Annual Tech Conference</DropdownMenuItem>
+                    <DropdownMenuItem>Your RSVP for Summer Music Fest is confirmed.</DropdownMenuItem>
+                    <DropdownMenuItem>Community Cleanup Day is this weekend!</DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" className="relative h-8 w-8 rounded-full">
