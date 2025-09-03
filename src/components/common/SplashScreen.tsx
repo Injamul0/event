@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -12,11 +13,11 @@ export default function SplashScreen() {
   useEffect(() => {
     const fadeTimer = setTimeout(() => {
       setIsFading(true);
-    }, 2500);
+    }, 1500);
 
     const visibilityTimer = setTimeout(() => {
       setIsVisible(false);
-    }, 3000);
+    }, 2000);
 
     const progressInterval = setInterval(() => {
       setProgress(prev => {
@@ -26,7 +27,7 @@ export default function SplashScreen() {
         }
         return prev + 1;
       });
-    }, 25); // 25ms * 100 = 2500ms = 2.5s
+    }, 15); // 15ms * 100 = 1500ms = 1.5s
 
     return () => {
       clearTimeout(fadeTimer);
