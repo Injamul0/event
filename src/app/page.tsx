@@ -20,7 +20,7 @@ export default function Home() {
       >
         <div className="absolute inset-0 bg-black/40" />
         <div className="relative z-10 p-4">
-          <h1 className="text-4xl md:text-6xl font-headline font-bold tracking-tight mb-4">
+          <h1 className="text-4xl md:text-6xl font-headline font-bold tracking-tight mb-4" autoFocus>
             Welcome to ClubHub
           </h1>
           <p className="text-lg md:text-xl max-w-2xl mx-auto mb-8">
