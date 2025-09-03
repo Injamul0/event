@@ -65,6 +65,24 @@ body {
   }
 }
 
+@layer utilities {
+  .perspective {
+    perspective: 1000px;
+  }
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  .rotate-x-15 {
+    transform: rotateX(15deg);
+  }
+  .rotate-y-15 {
+     transform: rotateY(15deg);
+  }
+   .group-hover-rotate-0 {
+    transform: rotateX(0deg) rotateY(0deg);
+  }
+}
+
 @keyframes fade-out {
   from { opacity: 1; }
   to { opacity: 0; }
