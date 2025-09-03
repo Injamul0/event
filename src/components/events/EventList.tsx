@@ -38,7 +38,7 @@ export default function EventList({ events }: EventListProps) {
   const showFilters = events.length >= 3;
 
   return (
-    <div>
+    <div className="animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
       <div className="text-center mb-12">
         <h2 className="text-3xl md:text-4xl font-headline font-bold">Upcoming Events</h2>
         <p className="text-muted-foreground mt-2 max-w-2xl mx-auto">
@@ -60,7 +60,7 @@ export default function EventList({ events }: EventListProps) {
         {showFilters && (
           <div className="flex gap-4">
             <Select value={category} onValueChange={setCategory}>
-              <SelectTrigger className="w-[180px]">
+              <SelectTrigger className="w-full md:w-[180px]">
                 <SelectValue placeholder="All Categories" />
               </SelectTrigger>
               <SelectContent>
@@ -68,7 +68,7 @@ export default function EventList({ events }: EventListProps) {
               </SelectContent>
             </Select>
             <Select value={dateSort} onValueChange={setDateSort}>
-              <SelectTrigger className="w-[180px]">
+              <SelectTrigger className="w-full md:w-[180px]">
                 <SelectValue placeholder="Sort by date" />
               </SelectTrigger>
               <SelectContent>

@@ -13,17 +13,17 @@ import { Label } from "@/components/ui/label";
 
 export default function Home() {
   return (
-    <div>
+    <div className="animate-fade-in">
       <section 
-        className="relative h-[calc(100vh-56px)] w-full flex items-center justify-center text-center text-white overflow-hidden bg-cover bg-center bg-no-repeat bg-fixed"
+        className="relative h-[calc(100vh-56px)] w-full flex items-center justify-center text-center text-white"
         style={{ backgroundImage: "url('https://picsum.photos/1920/1080')" }}
       >
         <div className="absolute inset-0 bg-black/60" />
-        <div className="relative z-10 p-4">
+        <div className="relative z-10 p-4 animate-fade-in-up">
           <h1 className="text-4xl md:text-6xl font-headline font-bold tracking-tight mb-4" autoFocus>
             Welcome to ClubHub
           </h1>
-          <p className="text-lg md:text-xl max-w-2xl mx-auto mb-8 text-foreground/80">
+          <p className="text-lg md:text-xl max-w-2xl mx-auto mb-8 text-white/90">
             Your central place for discovering, joining, and managing club events.
           </p>
           <Button asChild size="lg">
@@ -34,13 +34,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="events" className="container mx-auto px-4 py-16">
+      <section id="events" className="container mx-auto px-4 py-24">
         <EventList events={events} />
       </section>
 
-      <section id="about" className="py-16 bg-card/50">
+      <section id="about" className="py-24 bg-secondary/50">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <h2 className="text-3xl md:text-4xl font-headline font-bold mb-4">About ClubHub</h2>
               <p className="text-lg text-muted-foreground mb-6">
@@ -50,7 +50,7 @@ export default function Home() {
                 Whether you're looking for a tech conference, a music festival, or a community gathering, ClubHub makes it easy to find events that match your interests. We believe in the power of community and the magic that happens when people come together.
               </p>
             </div>
-            <div className="relative w-full h-auto aspect-[4/3] rounded-lg overflow-hidden shadow-lg">
+            <div className="relative w-full h-auto aspect-[4/3] rounded-xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-300">
               <Image
                 src="https://picsum.photos/800/600"
                 alt="Community gathering"
@@ -64,10 +64,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="contact" className="py-16">
+      <section id="contact" className="py-24">
         <div className="container mx-auto px-4">
            <div className="max-w-2xl mx-auto">
-            <Card>
+            <Card className="shadow-lg">
               <CardHeader>
                 <CardTitle className="text-3xl font-headline text-center">Contact Us</CardTitle>
               </CardHeader>
