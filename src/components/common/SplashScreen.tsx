@@ -41,7 +41,7 @@ export default function SplashScreen() {
       <div className="relative animate-logo-entrance">
         <div className="flex items-center space-x-4">
           <Sprout className="h-16 w-16 text-primary" />
-          <span className="text-5xl font-bold font-headline text-primary-foreground">ClubHub</span>
+          <span className="text-5xl font-bold font-headline text-primary-foreground">Campus-Vibe</span>
         </div>
       </div>
     </div>

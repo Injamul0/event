@@ -7,8 +7,8 @@ import ScrollToTopButton from '@/components/common/ScrollToTopButton';
 import SplashScreen from '@/components/common/SplashScreen';
 
 export const metadata: Metadata = {
-  title: 'ClubHub - Your Event Community',
-  description: 'Discover and join events in your community with ClubHub.',
+  title: 'Campus-Vibe - Your Event Community',
+  description: 'Discover and join events in your community with Campus-Vibe.',
 };
 
 export default function RootLayout({

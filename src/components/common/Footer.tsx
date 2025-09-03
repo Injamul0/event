@@ -9,7 +9,7 @@ export default function Footer() {
           <div className="mb-6 md:mb-0">
             <Link href="/" className="flex items-center space-x-2">
               <Sprout className="h-8 w-8 text-primary" />
-              <span className="text-2xl font-bold font-headline">ClubHub</span>
+              <span className="text-2xl font-bold font-headline">Campus-Vibe</span>
             </Link>
             <p className="mt-2 text-sm text-muted-foreground">Your community event hub.</p>
           </div>
@@ -29,7 +29,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-8 pt-8 border-t border-border text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} ClubHub. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Campus-Vibe. All rights reserved.</p>
         </div>
       </div>
     </footer>

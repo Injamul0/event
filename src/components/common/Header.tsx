@@ -79,7 +79,7 @@ export default function Header() {
         <div className="mr-4 hidden md:flex">
           <Link href="/" className="flex items-center space-x-2">
             <Sprout className="h-6 w-6 text-primary" />
-            <span className="hidden font-bold sm:inline-block font-headline">ClubHub</span>
+            <span className="hidden font-bold sm:inline-block font-headline">Campus-Vibe</span>
           </Link>
         </div>
         
@@ -124,7 +124,7 @@ export default function Header() {
                 <div className="flex flex-col gap-6 p-6">
                   <Link href="/" className="flex items-center space-x-2">
                      <Sprout className="h-6 w-6 text-primary" />
-                    <span className="font-bold font-headline">ClubHub</span>
+                    <span className="font-bold font-headline">Campus-Vibe</span>
                   </Link>
                   {navLinks.map((link) => {
                     return(

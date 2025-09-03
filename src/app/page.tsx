@@ -28,7 +28,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/50 to-transparent" />
         <div className="relative z-10 p-4 animate-fade-in-up">
           <h1 className="text-4xl md:text-6xl font-headline font-bold tracking-tight mb-4 text-shadow-lg" autoFocus>
-            Welcome to ClubHub
+            Welcome to Campus-Vibe
           </h1>
           <p className="text-lg md:text-xl max-w-2xl mx-auto mb-8 text-white/90 text-shadow">
             Your central place for discovering, joining, and managing club events.
@@ -49,12 +49,12 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl font-headline font-bold mb-4">About ClubHub</h2>
+              <h2 className="text-3xl md:text-4xl font-headline font-bold mb-4">About Campus-Vibe</h2>
               <p className="text-lg text-muted-foreground mb-6">
-                ClubHub is your central place for discovering, joining, and managing club events. Our mission is to connect communities and foster engagement through shared experiences.
+                Campus-Vibe is your central place for discovering, joining, and managing club events. Our mission is to connect communities and foster engagement through shared experiences.
               </p>
               <p className="text-foreground/90">
-                Whether you're looking for a tech conference, a music festival, or a community gathering, ClubHub makes it easy to find events that match your interests. We believe in the power of community and the magic that happens when people come together.
+                Whether you're looking for a tech conference, a music festival, or a community gathering, Campus-Vibe makes it easy to find events that match your interests. We believe in the power of community and the magic that happens when people come together.
               </p>
             </div>
              <div className="relative w-full h-auto aspect-[4/3] rounded-xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-300">
