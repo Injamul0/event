@@ -13,11 +13,11 @@ export default function SplashScreen() {
   useEffect(() => {
     const fadeTimer = setTimeout(() => {
       setIsFading(true);
-    }, 1500);
+    }, 1200);
 
     const visibilityTimer = setTimeout(() => {
       setIsVisible(false);
-    }, 2000);
+    }, 1700);
 
     const progressInterval = setInterval(() => {
       setProgress(prev => {
@@ -27,7 +27,7 @@ export default function SplashScreen() {
         }
         return prev + 1;
       });
-    }, 15); // 15ms * 100 = 1500ms = 1.5s
+    }, 12); // 12ms * 100 = 1200ms = 1.2s
 
     return () => {
       clearTimeout(fadeTimer);
