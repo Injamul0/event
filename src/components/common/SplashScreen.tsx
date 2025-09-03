@@ -16,6 +16,7 @@ export default function SplashScreen() {
 
     const visibilityTimer = setTimeout(() => {
       setIsVisible(false);
+      window.scrollTo(0, 0); // Force scroll to top
     }, 1700);
 
     return () => {
