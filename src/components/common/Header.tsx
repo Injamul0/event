@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -5,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Sprout, UserCircle } from 'lucide-react';
+import { Menu, Sprout } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import {
@@ -16,6 +17,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -24,11 +26,19 @@ const navLinks = [
   { href: '/admin', label: 'Admin' },
 ];
 
+type User = {
+  name: string;
+  email: string;
+  initials: string;
+  avatarUrl: string;
+}
+
 export default function Header() {
   const pathname = usePathname();
   const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
   
   useEffect(() => {
     // sessionStorage is a client-side only API
@@ -37,6 +47,12 @@ export default function Header() {
       const admin = sessionStorage.getItem('isAdmin') === 'true';
       setIsLoggedIn(loggedIn || admin);
       setIsAdmin(admin);
+      const storedUser = sessionStorage.getItem('user');
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      } else {
+        setUser(null);
+      }
     } catch (error) {
       // sessionStorage is not available
     }
@@ -46,11 +62,13 @@ export default function Header() {
     try {
       sessionStorage.removeItem('isLoggedIn');
       sessionStorage.removeItem('isAdmin');
+      sessionStorage.removeItem('user');
     } catch(error) {
        // sessionStorage is not available
     }
     setIsLoggedIn(false);
     setIsAdmin(false);
+    setUser(null);
     router.push('/');
     router.refresh();
   };
@@ -112,12 +130,14 @@ export default function Header() {
           </div>
           
           <div className="flex items-center gap-2">
-            {isLoggedIn ? (
+            {isLoggedIn && user ? (
                <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="rounded-full">
-                    <UserCircle className="h-6 w-6" />
-                    <span className="sr-only">User menu</span>
+                  <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+                     <Avatar className="h-8 w-8">
+                       <AvatarImage src={user.avatarUrl} alt={user.name} />
+                       <AvatarFallback>{user.initials}</AvatarFallback>
+                     </Avatar>
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">

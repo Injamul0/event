@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -26,9 +27,23 @@ export default function SignInPage() {
     try {
       if (email === 'admin@example.com' && password === 'password') {
         sessionStorage.setItem('isAdmin', 'true');
+        const adminUser = {
+          name: "Admin User",
+          email: "admin@example.com",
+          initials: "AU",
+          avatarUrl: "https://i.pravatar.cc/150?img=10",
+        };
+        sessionStorage.setItem('user', JSON.stringify(adminUser));
         router.push('/admin');
       } else if (email && password) {
         sessionStorage.setItem('isLoggedIn', 'true');
+        const defaultUser = {
+          name: "Alex Doe",
+          email: email,
+          initials: "AD",
+          avatarUrl: "https://i.pravatar.cc/150?img=12",
+        };
+        sessionStorage.setItem('user', JSON.stringify(defaultUser));
         toast({
           title: 'Login Successful',
           description: "Welcome back! Redirecting you to the homepage.",

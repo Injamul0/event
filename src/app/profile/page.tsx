@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -9,14 +9,16 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
-import { User, Edit3, Save, Calendar, Bell } from "lucide-react";
+import { User, Edit3, Save, Calendar, Bell, Upload } from "lucide-react";
 import { events } from '@/lib/mock-data';
 import Link from 'next/link';
+import { useToast } from '@/hooks/use-toast';
 
 export default function ProfilePage() {
   const [isEditing, setIsEditing] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const { toast } = useToast();
   
-  // In a real app, this data would come from your authentication context or an API call
   const [user, setUser] = useState({
     name: "Alex Doe",
     email: "alex.doe@example.com",
@@ -30,6 +32,59 @@ export default function ProfilePage() {
     }
   });
 
+  useEffect(() => {
+    try {
+      const storedUser = sessionStorage.getItem('user');
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      }
+    } catch (error) {
+      console.error("Could not retrieve user from session storage");
+    }
+  }, []);
+
+  const handleSave = () => {
+    setIsEditing(false);
+    try {
+      sessionStorage.setItem('user', JSON.stringify(user));
+      toast({
+        title: "Profile Saved",
+        description: "Your information has been updated.",
+      });
+    } catch (error) {
+      toast({
+        title: "Save Failed",
+        description: "Could not save profile. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleAvatarClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const newAvatarUrl = reader.result as string;
+        setUser(currentUser => {
+          const updatedUser = { ...currentUser, avatarUrl: newAvatarUrl };
+          try {
+             sessionStorage.setItem('user', JSON.stringify(updatedUser));
+          } catch (error) {
+            console.error("Could not save user to session storage");
+          }
+          return updatedUser;
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+
   const registeredEvents = events.slice(0, 2);
 
   return (
@@ -38,11 +93,29 @@ export default function ProfilePage() {
         <div className="md:col-span-1">
           <Card>
             <CardHeader className="text-center p-6">
-              <Avatar className="w-24 h-24 mx-auto mb-4 border-4 border-primary">
-                <AvatarImage src={user.avatarUrl} alt={user.name} />
-                <AvatarFallback className="text-3xl">{user.initials}</AvatarFallback>
-              </Avatar>
-              <CardTitle className="text-2xl font-headline">{user.name}</CardTitle>
+              <div className="relative w-24 h-24 mx-auto group">
+                <Avatar className="w-24 h-24 border-4 border-primary">
+                  <AvatarImage src={user.avatarUrl} alt={user.name} />
+                  <AvatarFallback className="text-3xl">{user.initials}</AvatarFallback>
+                </Avatar>
+                <Button 
+                  variant="outline" 
+                  size="icon" 
+                  className="absolute bottom-0 right-0 rounded-full h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity"
+                  onClick={handleAvatarClick}
+                >
+                  <Upload className="h-4 w-4" />
+                  <span className="sr-only">Upload profile picture</span>
+                </Button>
+                <input 
+                  type="file" 
+                  ref={fileInputRef} 
+                  onChange={handleFileChange}
+                  className="hidden" 
+                  accept="image/png, image/jpeg"
+                />
+              </div>
+              <CardTitle className="text-2xl font-headline mt-4">{user.name}</CardTitle>
               <CardDescription>{user.email}</CardDescription>
             </CardHeader>
             <CardContent className="text-center text-sm text-muted-foreground">
@@ -58,7 +131,7 @@ export default function ProfilePage() {
                 <User className="h-6 w-6 text-primary" />
                 <CardTitle className="font-headline text-2xl">Personal Information</CardTitle>
               </div>
-              <Button variant="ghost" size="icon" onClick={() => setIsEditing(!isEditing)}>
+              <Button variant="ghost" size="icon" onClick={isEditing ? handleSave : () => setIsEditing(true)}>
                 {isEditing ? <Save className="h-5 w-5" /> : <Edit3 className="h-5 w-5" />}
                 <span className="sr-only">{isEditing ? 'Save' : 'Edit'}</span>
               </Button>
