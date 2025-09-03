@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -12,9 +13,9 @@ import { Label } from "@/components/ui/label";
 
 export default function Home() {
   return (
-    <div className="snap-y snap-mandatory h-[calc(100vh-56px)] overflow-y-scroll">
+    <div>
       <section 
-        className="relative h-full w-full flex items-center justify-center text-center text-white overflow-hidden bg-cover bg-center bg-no-repeat bg-fixed snap-start"
+        className="relative h-[calc(100vh-56px)] w-full flex items-center justify-center text-center text-white overflow-hidden bg-cover bg-center bg-no-repeat bg-fixed"
         style={{ backgroundImage: "url('https://picsum.photos/1920/1080')" }}
       >
         <div className="absolute inset-0 bg-black/40" />
@@ -33,11 +34,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="events" className="h-full w-full flex flex-col justify-center snap-start container mx-auto px-4 py-16">
+      <section id="events" className="container mx-auto px-4 py-16">
         <EventList events={events} />
       </section>
 
-      <section id="about" className="h-full w-full flex items-center snap-start bg-secondary text-secondary-foreground">
+      <section id="about" className="py-16 bg-secondary text-secondary-foreground">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -63,7 +64,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="contact" className="h-full w-full flex items-center snap-start">
+      <section id="contact" className="py-16">
         <div className="container mx-auto px-4">
            <div className="max-w-2xl mx-auto">
             <Card>
