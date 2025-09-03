@@ -33,11 +33,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="events" className="container mx-auto px-4 py-16 h-full w-full flex flex-col justify-center snap-start">
+      <section id="events" className="h-full w-full flex flex-col justify-center snap-start container mx-auto px-4 py-16">
         <EventList events={events} />
       </section>
 
-      <section id="about" className="bg-secondary text-secondary-foreground py-16 h-full w-full flex items-center snap-start">
+      <section id="about" className="h-full w-full flex items-center snap-start bg-secondary text-secondary-foreground py-16">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -63,7 +63,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="contact" className="py-16 h-full w-full flex items-center snap-start">
+      <section id="contact" className="h-full w-full flex items-center snap-start py-16">
         <div className="container mx-auto px-4">
            <div className="max-w-2xl mx-auto">
             <Card>
