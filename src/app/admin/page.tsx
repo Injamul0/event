@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -20,11 +21,19 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import AnalyticsChart from "@/components/admin/AnalyticsChart"
 import { events, users } from "@/lib/mock-data"
-import { BarChart, Calendar, Users, Activity, Loader2 } from "lucide-react"
+import { BarChart, Calendar, Users, Activity, Loader2, KeyRound } from "lucide-react"
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
+import { useToast } from '@/hooks/use-toast';
 
 export default function AdminDashboard() {
   const router = useRouter();
+  const { toast } = useToast();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   useEffect(() => {
     try {
@@ -39,6 +48,29 @@ export default function AdminDashboard() {
        router.push('/signin');
     }
   }, [router]);
+
+  const handleChangePassword = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (newPassword !== confirmPassword) {
+      toast({
+        title: "Error",
+        description: "New passwords do not match.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    // In a real app, you would make an API call here.
+    // For this prototype, we'll just show a success message.
+    console.log("Password change submitted for admin.");
+    toast({
+      title: "Password Changed",
+      description: "Your password has been updated successfully.",
+    });
+    setCurrentPassword('');
+    setNewPassword('');
+    setConfirmPassword('');
+  };
 
   if (!isAuthenticated) {
     return (
@@ -120,6 +152,35 @@ export default function AdminDashboard() {
 
         <Card className="lg:col-span-3">
           <CardHeader>
+            <CardTitle className="font-headline">Change Password</CardTitle>
+            <CardDescription>
+              Update your administrator password.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleChangePassword} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="current-password">Current Password</Label>
+                <Input id="current-password" type="password" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} required />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="new-password">New Password</Label>
+                <Input id="new-password" type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="confirm-password">Confirm New Password</Label>
+                <Input id="confirm-password" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
+              </div>
+              <Button type="submit" className="w-full">
+                <KeyRound className="mr-2 h-4 w-4" />
+                Update Password
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+
+        <Card className="lg:col-span-4">
+          <CardHeader>
             <CardTitle className="font-headline">Recent Events</CardTitle>
             <CardDescription>
               A list of the most recently added events.
@@ -145,7 +206,7 @@ export default function AdminDashboard() {
           </CardContent>
         </Card>
 
-        <Card className="lg:col-span-7">
+        <Card className="lg:col-span-3">
           <CardHeader>
             <CardTitle className="font-headline">New Users</CardTitle>
             <CardDescription>
