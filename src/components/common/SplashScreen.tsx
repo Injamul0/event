@@ -35,11 +35,12 @@ export default function SplashScreen() {
         isFading && 'opacity-0'
       )}
     >
-      <div className="relative animate-logo-entrance">
+      <div className="relative animate-logo-entrance overflow-hidden">
         <div className="flex items-center space-x-4">
           <Logo className="h-16 w-16" />
           <span className="text-5xl font-bold font-headline text-primary">Campus-Vibe</span>
         </div>
+        <div className="absolute inset-0 animate-glimmer" />
       </div>
     </div>
   );
