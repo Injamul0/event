@@ -179,8 +179,8 @@ export default function Header() {
                       </div>
                     </DropdownMenuItem>
                      <DropdownMenuSeparator />
-                     <DropdownMenuItem className="justify-center text-sm text-primary hover:text-primary">
-                        <Link href="#">View all notifications</Link>
+                     <DropdownMenuItem className="justify-center text-sm text-primary hover:text-primary" asChild>
+                        <Link href="/notifications">View all notifications</Link>
                      </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
