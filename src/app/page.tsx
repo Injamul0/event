@@ -16,14 +16,21 @@ export default function Home() {
     <div className="animate-fade-in">
       <section 
         className="relative h-[calc(100vh-56px)] w-full flex items-center justify-center text-center text-white"
-        style={{ backgroundImage: "url('https://picsum.photos/1920/1080')" }}
       >
-        <div className="absolute inset-0 bg-black/60" />
+        <Image 
+          src="https://picsum.photos/1920/1080" 
+          alt="Hero background"
+          fill
+          style={{ objectFit: 'cover' }}
+          className="z-0"
+          data-ai-hint="community event"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/50 to-transparent" />
         <div className="relative z-10 p-4 animate-fade-in-up">
-          <h1 className="text-4xl md:text-6xl font-headline font-bold tracking-tight mb-4" autoFocus>
+          <h1 className="text-4xl md:text-6xl font-headline font-bold tracking-tight mb-4 text-shadow-lg" autoFocus>
             Welcome to ClubHub
           </h1>
-          <p className="text-lg md:text-xl max-w-2xl mx-auto mb-8 text-white/90">
+          <p className="text-lg md:text-xl max-w-2xl mx-auto mb-8 text-white/90 text-shadow">
             Your central place for discovering, joining, and managing club events.
           </p>
           <Button asChild size="lg">

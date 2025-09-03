@@ -17,8 +17,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        body: ['Inter', 'sans-serif'],
-        headline: ['Lora', 'serif'],
+        body: ['"Inter"', 'sans-serif'],
+        headline: ['"Lora"', 'serif'],
         code: ['monospace'],
       },
       colors: {
@@ -111,7 +111,23 @@ export default {
         'fade-in': 'fade-in 0.5s ease-out forwards',
         'fade-in-up': 'fade-in-up 0.5s ease-out forwards',
       },
+       textShadow: {
+        DEFAULT: '0 2px 4px rgba(0,0,0,0.5)',
+        lg: '0 4px 10px rgba(0,0,0,0.5)',
+      },
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [
+    require('tailwindcss-animate'),
+    function ({ addUtilities }: { addUtilities: any}) {
+      addUtilities({
+        '.text-shadow': {
+          textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)',
+        },
+        '.text-shadow-lg': {
+          textShadow: '0 4px 10px rgba(0, 0, 0, 0.5)',
+        },
+      });
+    },
+  ],
 } satisfies Config;
