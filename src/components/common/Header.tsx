@@ -75,8 +75,12 @@ export default function Header() {
           </div>
           
           <div className="flex items-center gap-2">
-            <Button variant="ghost">Sign In</Button>
-            <Button className="bg-primary text-primary-foreground hover:bg-primary/90">Sign Up</Button>
+            <Button variant="ghost" asChild>
+              <Link href="/signin">Sign In</Link>
+            </Button>
+            <Button className="bg-primary text-primary-foreground hover:bg-primary/90" asChild>
+              <Link href="/signup">Sign Up</Link>
+            </Button>
           </div>
         </div>
       </div>
