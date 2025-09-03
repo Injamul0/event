@@ -31,6 +31,8 @@ export default function AdminDashboard() {
   const router = useRouter();
   const { toast } = useToast();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  
+  const [adminEmail, setAdminEmail] = useState('');
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -40,6 +42,11 @@ export default function AdminDashboard() {
       const isAdmin = sessionStorage.getItem('isAdmin');
       if (isAdmin === 'true') {
         setIsAuthenticated(true);
+        const storedAdmin = sessionStorage.getItem('adminCredentials');
+        if(storedAdmin){
+          const adminCreds = JSON.parse(storedAdmin);
+          setAdminEmail(adminCreds.email);
+        }
       } else {
         router.push('/signin');
       }
@@ -49,27 +56,51 @@ export default function AdminDashboard() {
     }
   }, [router]);
 
-  const handleChangePassword = (e: React.FormEvent) => {
+  const handleChangeCredentials = (e: React.FormEvent) => {
     e.preventDefault();
-    if (newPassword !== confirmPassword) {
+    try {
+      const storedAdmin = sessionStorage.getItem('adminCredentials');
+      if (!storedAdmin) {
+        toast({ title: "Error", description: "Could not verify credentials.", variant: "destructive" });
+        return;
+      }
+
+      const adminCreds = JSON.parse(storedAdmin);
+      if(adminCreds.password !== currentPassword) {
+        toast({ title: "Error", description: "Current password is incorrect.", variant: "destructive" });
+        return;
+      }
+
+      if (newPassword && newPassword !== confirmPassword) {
+        toast({ title: "Error", description: "New passwords do not match.", variant: "destructive" });
+        return;
+      }
+      
+      const newCreds = {
+        email: adminEmail,
+        password: newPassword ? newPassword : adminCreds.password
+      };
+      
+      sessionStorage.setItem('adminCredentials', JSON.stringify(newCreds));
+
+      const adminUser = sessionStorage.getItem('user');
+      if(adminUser){
+        const parsedUser = JSON.parse(adminUser);
+        parsedUser.email = adminEmail;
+        sessionStorage.setItem('user', JSON.stringify(parsedUser));
+      }
+
       toast({
-        title: "Error",
-        description: "New passwords do not match.",
-        variant: "destructive",
+        title: "Credentials Updated",
+        description: "Your login details have been updated for this session.",
       });
-      return;
+
+      setCurrentPassword('');
+      setNewPassword('');
+      setConfirmPassword('');
+    } catch (error) {
+      toast({ title: "Error", description: "An error occurred.", variant: "destructive" });
     }
-    
-    // In a real app, you would make an API call here.
-    // For this prototype, we'll just show a success message.
-    console.log("Password change submitted for admin.");
-    toast({
-      title: "Password Changed",
-      description: "Your password has been updated successfully.",
-    });
-    setCurrentPassword('');
-    setNewPassword('');
-    setConfirmPassword('');
   };
 
   if (!isAuthenticated) {
@@ -152,28 +183,32 @@ export default function AdminDashboard() {
 
         <Card className="lg:col-span-3">
           <CardHeader>
-            <CardTitle className="font-headline">Change Password</CardTitle>
+            <CardTitle className="font-headline">Change Admin Credentials</CardTitle>
             <CardDescription>
-              Update your administrator password.
+              Update your administrator email and password.
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleChangePassword} className="space-y-4">
+            <form onSubmit={handleChangeCredentials} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="admin-email">Admin Email</Label>
+                <Input id="admin-email" type="email" value={adminEmail} onChange={(e) => setAdminEmail(e.target.value)} required />
+              </div>
               <div className="space-y-2">
                 <Label htmlFor="current-password">Current Password</Label>
-                <Input id="current-password" type="password" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} required />
+                <Input id="current-password" type="password" placeholder="Required to make changes" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} required />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="new-password">New Password</Label>
-                <Input id="new-password" type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required />
+                <Input id="new-password" type="password" placeholder="Leave blank to keep same" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="confirm-password">Confirm New Password</Label>
-                <Input id="confirm-password" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
+                <Input id="confirm-password" type="password" placeholder="Leave blank to keep same" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
               </div>
               <Button type="submit" className="w-full">
                 <KeyRound className="mr-2 h-4 w-4" />
-                Update Password
+                Update Credentials
               </Button>
             </form>
           </CardContent>

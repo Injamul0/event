@@ -25,11 +25,25 @@ export default function SignInPage() {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      if (email === 'admin@example.com' && password === 'password') {
+      const storedAdmin = sessionStorage.getItem('adminCredentials');
+      let adminEmail = 'admin@example.com';
+      let adminPassword = 'password';
+
+      if (storedAdmin) {
+        const adminCreds = JSON.parse(storedAdmin);
+        adminEmail = adminCreds.email;
+        adminPassword = adminCreds.password;
+      }
+
+      if (email === adminEmail && password === adminPassword) {
         sessionStorage.setItem('isAdmin', 'true');
+        // Store credentials for the password change feature
+        if (!storedAdmin) {
+          sessionStorage.setItem('adminCredentials', JSON.stringify({ email: adminEmail, password: adminPassword }));
+        }
         const adminUser = {
           name: "Admin User",
-          email: "admin@example.com",
+          email: adminEmail,
           initials: "AU",
           avatarUrl: "https://i.pravatar.cc/150?img=10",
         };
@@ -71,7 +85,7 @@ export default function SignInPage() {
         <CardHeader>
           <CardTitle className="text-2xl font-headline">Sign In</CardTitle>
           <CardDescription>
-            Enter your credentials to access your account. <br /> Use <strong>admin@example.com</strong> and <strong>password</strong> to login as admin.
+            Enter your credentials to access your account. <br /> Default admin: <strong>admin@example.com</strong> / <strong>password</strong>
           </CardDescription>
         </CardHeader>
         <CardContent>
