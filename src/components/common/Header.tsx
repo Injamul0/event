@@ -1,11 +1,21 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Sprout } from 'lucide-react';
+import { Menu, Sprout, UserCircle } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -16,7 +26,34 @@ const navLinks = [
 
 export default function Header() {
   const pathname = usePathname();
-  const isAdmin = false; // This would be replaced with actual authentication state
+  const router = useRouter();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  
+  useEffect(() => {
+    // sessionStorage is a client-side only API
+    try {
+      const loggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
+      const admin = sessionStorage.getItem('isAdmin') === 'true';
+      setIsLoggedIn(loggedIn || admin);
+      setIsAdmin(admin);
+    } catch (error) {
+      // sessionStorage is not available
+    }
+  }, [pathname]); // Re-check on route change
+
+  const handleLogout = () => {
+    try {
+      sessionStorage.removeItem('isLoggedIn');
+      sessionStorage.removeItem('isAdmin');
+    } catch(error) {
+       // sessionStorage is not available
+    }
+    setIsLoggedIn(false);
+    setIsAdmin(false);
+    router.push('/');
+    router.refresh();
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -30,7 +67,7 @@ export default function Header() {
         
         <nav className="hidden md:flex items-center gap-6 text-sm">
           {navLinks.map((link) => {
-            if (link.href === '/admin' && !isAdmin) return null; // In a real app, this would be based on user role
+            if (link.href === '/admin' && !isAdmin) return null;
             return (
               <Link
                 key={link.href}
@@ -75,12 +112,41 @@ export default function Header() {
           </div>
           
           <div className="flex items-center gap-2">
-            <Button variant="ghost" asChild>
-              <Link href="/signin">Sign In</Link>
-            </Button>
-            <Button className="bg-primary text-primary-foreground hover:bg-primary/90" asChild>
-              <Link href="/signup">Sign Up</Link>
-            </Button>
+            {isLoggedIn ? (
+               <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon" className="rounded-full">
+                    <UserCircle className="h-6 w-6" />
+                    <span className="sr-only">User menu</span>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    <Link href="/profile">Profile</Link>
+                  </DropdownMenuItem>
+                  {isAdmin && (
+                    <DropdownMenuItem asChild>
+                     <Link href="/admin">Admin Dashboard</Link>
+                    </DropdownMenuItem>
+                  )}
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleLogout}>
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <>
+                <Button variant="ghost" asChild>
+                  <Link href="/signin">Sign In</Link>
+                </Button>
+                <Button className="bg-primary text-primary-foreground hover:bg-primary/90" asChild>
+                  <Link href="/signup">Sign Up</Link>
+                </Button>
+              </>
+            )}
           </div>
         </div>
       </div>

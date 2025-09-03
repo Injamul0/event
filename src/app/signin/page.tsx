@@ -23,31 +23,28 @@ export default function SignInPage() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (email === 'admin@example.com' && password === 'password') {
-      // In a real app, you'd set a session cookie or token here.
-      // For this prototype, we'll use sessionStorage.
-      try {
+    try {
+      if (email === 'admin@example.com' && password === 'password') {
         sessionStorage.setItem('isAdmin', 'true');
         router.push('/admin');
-      } catch (error) {
-        // sessionStorage is not available in server-side rendering or if disabled
-         toast({
+      } else if (email && password) {
+        sessionStorage.setItem('isLoggedIn', 'true');
+        toast({
+          title: 'Login Successful',
+          description: "Welcome back! Redirecting you to the homepage.",
+        });
+        router.push('/');
+      } else {
+        toast({
           title: 'Login Failed',
-          description: 'Could not save session. Please enable storage in your browser.',
+          description: 'Invalid email or password.',
           variant: 'destructive',
         });
       }
-    } else if (email && password) {
-      // Simulate a successful login for any other user
-      toast({
-        title: 'Login Successful',
-        description: "Welcome back! Redirecting you to the homepage.",
-      });
-      router.push('/');
-    } else {
-      toast({
+    } catch (error) {
+       toast({
         title: 'Login Failed',
-        description: 'Invalid email or password.',
+        description: 'Could not save session. Please enable storage in your browser.',
         variant: 'destructive',
       });
     }
