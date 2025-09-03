@@ -103,12 +103,12 @@ export default function SignInPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-[calc(100vh-150px)]">
-      <Card className="mx-auto max-w-sm">
-        <CardHeader>
-          <CardTitle className="text-2xl font-headline">Sign In</CardTitle>
+    <div className="flex items-center justify-center min-h-[calc(100vh-150px)] bg-gradient-to-br from-background to-secondary/40 p-4">
+      <Card className="mx-auto max-w-sm w-full bg-background/80 backdrop-blur-sm shadow-2xl">
+        <CardHeader className="text-center">
+          <CardTitle className="text-2xl font-headline">Welcome Back</CardTitle>
           <CardDescription>
-            Enter your credentials to access your account. <br /> Default admin: <strong>admin@example.com</strong> / <strong>password</strong>
+            Enter your credentials to access your account.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -129,7 +129,7 @@ export default function SignInPage() {
                 <Label htmlFor="password">Password</Label>
                 <Link
                   href="#"
-                  className="ml-auto inline-block text-sm underline"
+                  className="ml-auto inline-block text-sm text-primary/80 hover:text-primary underline"
                 >
                   Forgot your password?
                 </Link>
@@ -142,7 +142,7 @@ export default function SignInPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
+                <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 text-muted-foreground hover:text-foreground">
                   {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
               </div>
@@ -151,7 +151,7 @@ export default function SignInPage() {
               Login
             </Button>
           </form>
-           <div className="relative my-4">
+           <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">
               <span className="w-full border-t" />
             </div>
@@ -162,25 +162,28 @@ export default function SignInPage() {
             </div>
           </div>
           <div className="grid grid-cols-4 gap-2">
-            <Button variant="outline" size="icon">
+            <Button variant="outline" size="icon" aria-label="Login with Google">
               <GoogleIcon />
             </Button>
-            <Button variant="outline" size="icon">
+            <Button variant="outline" size="icon" aria-label="Login with Facebook">
               <Facebook />
             </Button>
-            <Button variant="outline" size="icon">
+            <Button variant="outline" size="icon" aria-label="Login with Github">
               <Github />
             </Button>
-            <Button variant="outline" size="icon">
+            <Button variant="outline" size="icon" aria-label="Login with LinkedIn">
               <Linkedin />
             </Button>
           </div>
           <div className="mt-4 text-center text-sm">
             Don&apos;t have an account?{' '}
-            <Link href="/signup" className="underline">
+            <Link href="/signup" className="underline text-primary/80 hover:text-primary">
               Sign up
             </Link>
           </div>
+           <p className="mt-4 text-center text-xs text-muted-foreground">
+              Admin: <strong>admin@example.com</strong> / <strong>password</strong>
+            </p>
         </CardContent>
       </Card>
     </div>

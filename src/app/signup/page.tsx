@@ -59,12 +59,12 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-[calc(100vh-150px)]">
-      <Card className="mx-auto max-w-sm">
-        <CardHeader>
-          <CardTitle className="text-xl font-headline">Sign Up</CardTitle>
+    <div className="flex items-center justify-center min-h-[calc(100vh-150px)] bg-gradient-to-br from-background to-secondary/40 p-4">
+      <Card className="mx-auto max-w-sm w-full bg-background/80 backdrop-blur-sm shadow-2xl">
+        <CardHeader className="text-center">
+          <CardTitle className="text-2xl font-headline">Create an Account</CardTitle>
           <CardDescription>
-            Enter your information to create an account
+            Enter your information to join the community.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -100,7 +100,7 @@ export default function SignUpPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
+                <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 text-muted-foreground hover:text-foreground">
                   {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
               </div>
@@ -109,33 +109,33 @@ export default function SignUpPage() {
               Create an account
             </Button>
           </form>
-          <div className="relative my-4">
+          <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">
               <span className="w-full border-t" />
             </div>
             <div className="relative flex justify-center text-xs uppercase">
               <span className="bg-background px-2 text-muted-foreground">
-                Or continue with
+                Or sign up with
               </span>
             </div>
           </div>
           <div className="grid grid-cols-4 gap-2">
-            <Button variant="outline" size="icon">
+            <Button variant="outline" size="icon" aria-label="Sign up with Google">
               <GoogleIcon />
             </Button>
-            <Button variant="outline" size="icon">
+            <Button variant="outline" size="icon" aria-label="Sign up with Facebook">
               <Facebook />
             </Button>
-            <Button variant="outline" size="icon">
+            <Button variant="outline" size="icon" aria-label="Sign up with Github">
               <Github />
             </Button>
-            <Button variant="outline" size="icon">
+            <Button variant="outline" size="icon" aria-label="Sign up with LinkedIn">
               <Linkedin />
             </Button>
           </div>
           <div className="mt-4 text-center text-sm">
             Already have an account?{' '}
-            <Link href="/signin" className="underline">
+            <Link href="/signin" className="underline text-primary/80 hover:text-primary">
               Sign in
             </Link>
           </div>
