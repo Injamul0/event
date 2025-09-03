@@ -37,6 +37,13 @@ export default function SignInPage() {
           variant: 'destructive',
         });
       }
+    } else if (email && password) {
+      // Simulate a successful login for any other user
+      toast({
+        title: 'Login Successful',
+        description: "Welcome back!",
+      });
+      // You could redirect to a user dashboard here, e.g., router.push('/dashboard')
     } else {
       toast({
         title: 'Login Failed',
