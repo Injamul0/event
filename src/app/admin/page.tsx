@@ -121,7 +121,7 @@ export default function AdminDashboard() {
             <CardDescription>
               A list of users who recently joined.
             </CardDescription>
-          </CardHeader>
+          </Header>
           <CardContent>
              <Table>
               <TableHeader>
