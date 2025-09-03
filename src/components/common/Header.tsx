@@ -21,6 +21,8 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 const navLinks = [
   { href: '/', label: 'Home' },
+  { href: '/#about', label: 'About' },
+  { href: '/#contact', label: 'Contact' },
   { href: '/admin', label: 'Admin' },
 ];
 
@@ -90,7 +92,7 @@ export default function Header() {
                 href={link.href}
                 className={cn(
                   'transition-colors hover:text-foreground/80',
-                  pathname === link.href ? 'text-foreground' : 'text-foreground/60'
+                  (pathname === link.href || (link.href.startsWith('/#') && pathname === '/')) ? 'text-foreground' : 'text-foreground/60'
                 )}
               >
                 {link.label}
