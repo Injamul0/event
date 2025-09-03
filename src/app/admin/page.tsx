@@ -1,3 +1,7 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import {
   Card,
   CardContent,
@@ -16,9 +20,35 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import AnalyticsChart from "@/components/admin/AnalyticsChart"
 import { events, users } from "@/lib/mock-data"
-import { BarChart, Calendar, Users, Activity } from "lucide-react"
+import { BarChart, Calendar, Users, Activity, Loader2 } from "lucide-react"
 
 export default function AdminDashboard() {
+  const router = useRouter();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    try {
+      const isAdmin = sessionStorage.getItem('isAdmin');
+      if (isAdmin === 'true') {
+        setIsAuthenticated(true);
+      } else {
+        router.push('/signin');
+      }
+    } catch (error) {
+       // sessionStorage is not available
+       router.push('/signin');
+    }
+  }, [router]);
+
+  if (!isAuthenticated) {
+    return (
+      <div className="flex items-center justify-center min-h-[calc(100vh-150px)]">
+        <Loader2 className="h-8 w-8 animate-spin" />
+        <p className="ml-4">Authenticating...</p>
+      </div>
+    );
+  }
+
   const totalEvents = events.length;
   const totalUsers = users.length;
   const totalAttendees = events.reduce((acc, event) => acc + event.attendees, 0);
