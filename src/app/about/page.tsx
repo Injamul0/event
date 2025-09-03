@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 
 export default function AboutPage() {
@@ -13,7 +14,7 @@ export default function AboutPage() {
             Whether you're looking for a tech conference, a music festival, or a community gathering, ClubHub makes it easy to find events that match your interests. We believe in the power of community and the magic that happens when people come together.
           </p>
         </div>
-        <div className="relative w-full h-96 rounded-lg overflow-hidden shadow-lg">
+        <div className="relative w-full h-auto aspect-[4/3] rounded-lg overflow-hidden shadow-lg">
           <Image
             src="https://picsum.photos/800/600"
             alt="Community gathering"
